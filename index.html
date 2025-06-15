@@ -1,32 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DungeonLite</title>
-</head>
-<body style="background-color:black;">
-    <h1 style="text-align:center; color:red; font-size:45px">Welcome to DungeonLite</h1>
-    <p style="text-align:center; color:red; font-size:20px">
-        <img src="images/wizardLeft.png" width="62.5" height="80"> <br>
-        controls: <br>
-        w - move up <br>
-        a - move left <br>
-        d - move right <br>
-        s - move down <br>
-        mouse click - fire projectile <br>
-        space bar - pause <br>
-        <br>
-        items list: <br>
-        <img src="images/healthBoost.png" style="float: center;" width="30" height="30">
-        - restores lost health <br>
-        <img src="images/speedBoost.png" style="float: center;" width="30" height="30">
-        - enhances your speed <br>
-        <img src="images/spellBoost.png" style="float: center;" width="30" height="30">
-        - raises your attack limit <br>
-    </p>
-    <form style="text-align:center; color: grey;" action=gameplay.html>
-        <input type="submit" value="Play" />
-    </form>
-    </script>
-</body>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
+        header {
+            background-color: #3c3c3c;
+            color: #fff;
+            text-align: center;
+            padding: 0.5em;
+            font-size: 5em;
+            width: 100%;
+        }
+
+        main {
+            padding: 2em;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .intro {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 2em;
+            text-align: left;
+            margin-bottom: 3em;
+        }
+
+        .intro-text {
+            flex: 1;
+            padding: 1.5em;
+            background-color: #333333;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .intro-text h1 {
+            font-size: 2.5em;
+            color: #e8e8e8;
+            margin-bottom: 0.5em;
+        }
+
+        .intro-text p {
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .intro-box {
+            width: 300px;
+            height: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 2em;
+        }
+
+        .content {
+            flex: 1 1 45%;
+            padding: 1.5em;
+            background-color: #333333;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #e8e8e8;
+            margin-bottom: 0.5em;
+        }
+
+        p, ul {
+            line-height: 1.6;
+            font-size: 1.1em;
+            margin-bottom: 1.2em;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .imgpos {
+            padding-left: 150px;
+        }
+
+        .column1 {
+            float: left;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+
+        .column2 {
+            float: left;
+            width: 25%;
+            padding: 0px;
+        }
+
+        /* Clear floats after image containers */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        li {
+            margin-bottom: 1em;
+        }
+
+        .cta {
+            background-color: #ff4c4c;
+            color: white;
+            padding: 20px 80px;
+            font-size: 1.2em;
+            text-align: center;
+            display: block;
+            width: fit-content;
+            margin: 2em auto;
+            border-radius: 5px;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(255, 76, 76, 0.4);
+        }
+
+        .cta:hover {
+            background-color: #ff2e2e;
+            box-shadow: 0 6px 12px rgba(255, 46, 46, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+            padding: 1.5em 0;
+            background-color: #3c3c3c;
+            width: 100%;
+        }
+
+        .footer-text {
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .content {
+                width: 100%;
+                margin-bottom: 1.5em;
+            }
+
+            .intro {
+                flex-direction: column;
+            }
+
+            .intro-box {
+                width: 100%;
+                height: 200px;
+                margin-top: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        DungeonLite
+    </header>
+    <main>
+        <div class="intro">
+            <div class="intro-text">
+                <h1>Welcome to the Dungeon!</h1>
+                <p>In this single-player game, you play as a powerful wizard trapped in a mysterious dungeon. Your goal is to survive and defeat the waves of Demons at each dungeon level, using magic spells and upgrade items. The game ends when all dungeon levels have been completed or if you lose all your health.</p>
+            </div>
+            <div class="intro-box">
+                <img src="images/logo.png" class="intro-box">
+            </div>
+        </div>
+
+        <a href="gameplay.html" class="cta"><font size="20">Click to Play Now</font></a>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h2>How to Play</h2>
+                <ul>
+                    <div class="row">
+                        <div class="column1">
+                            <p style="width:200px;"><strong>Move:</strong> Use the W, A, S, and D keys to move around in the dungeon</p>
+                            <img src="images/moving.gif" style="width:200px;height:200px;">
+                        </div>
+                        <div class="column1">
+                            <p style="width:200px;"><strong>Shoot:</strong> Use your cursor to aim and 
+                            <strong>click</strong> to shoot an energy ball</p>
+                            <img src="images/shooting.gif" style="width:200px;height:200px;">
+                        </div>
+                    </div>
+                    <p><strong>Demons</strong> will follow you around and deal damage on contact <br>
+                    Watch for <strong>Demons</strong> with special abilities</p>
+                    <div class="row">
+                        <div class="column2">
+                            <img src="images/demonLeft.png" style="width:100%">
+                        </div>
+                        <div class="column2">
+                            <img src="images/healDemonLeft.png" style="width:100%">
+                        </div>
+                        <div class="column2">
+                            <img src="images/spawnerDemonLeft.png" style="width:100%">
+                        </div>
+                        <div class="column2">
+                            <img src="images/spikerDemonLeft.png" style="width:100%">
+                        </div>
+                    </div>
+                    <p><strong>Pause:</strong> Press the space key</p>
+                </ul>
+            </div>
+
+            <div class="content">
+                <h2>Key Items</h2>
+                <ul>
+                    <p><strong>Health Boost:</strong> Restores lost health </p>
+                    <img src="images/healthBoost.png" class="imgpos">
+                    <p><strong>Speed Boost:</strong> Increases movement speed </p>
+                    <img src="images/speedBoost.png" class="imgpos">
+                    <p><strong>Spell Boost:</strong> Reduces energy ball reload time </p>
+                    <img src="images/spellBoost.png" class="imgpos">
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="footer-text">Developed by Hulbert Zeng | © 2025 DungeonLite</p>
+    </footer>
+</body>
 </html>
